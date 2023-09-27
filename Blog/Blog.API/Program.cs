@@ -1,9 +1,12 @@
 ﻿
+using Blog.API.EFConfigurations;
+using Microsoft.EntityFrameworkCore;
+
 namespace Blog.API;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,19 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddDbContext<BlogContext>(options =>
+        {
+            var connectionString = builder.Configuration
+            .GetSection("BlogDbConnectionString")
+            .Get<string>();
+
+            options.UseSqlServer(connectionString, options =>
+            {
+                options.MigrationsAssembly(typeof(Program).Assembly.FullName);
+            });
+        });
+
 
         var app = builder.Build();
 
@@ -29,6 +45,15 @@ public class Program
 
 
         app.MapControllers();
+
+        //if (app.Environment.IsDevelopment())
+        //{
+        //    using var scope = app.Services.CreateScope();
+
+        //    var context = scope.ServiceProvider.GetRequiredService<BlogContext>();
+
+        //    await new BlogContextSeed().SeedAsync(context);
+        //}
 
         app.Run();
     }

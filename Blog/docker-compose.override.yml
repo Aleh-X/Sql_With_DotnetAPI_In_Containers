@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  sqldata:
+    environment:
+      - SA_PASSWORD=Very@Secure1!
+      - ACCEPT_EULA=1
+    ports:
+      - "1433:1433"
+    volumes:
+      - blog-sqldata:/var/opt/mssql
+  blog.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+
+volumes:
+  blog-sqldata:
+    external: false

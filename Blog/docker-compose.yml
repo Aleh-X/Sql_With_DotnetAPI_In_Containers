@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  sqldata:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+  blog.api:
+    image: ${DOCKER_REGISTRY-}blog
+    build:
+      context: .
+      dockerfile: Blog.API/Dockerfile

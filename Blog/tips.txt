@@ -1,1 +1,8 @@
-﻿git rm -rf --cached . --> to remove noise on mac os
+﻿Git:
+git rm -rf --cached . --> to remove noise on mac os
+
+EF:
+dotnet ef migrations remove --context [context name]
+dotnet ef migrations add [migration name] -> add migration
+dotnet ef database update -> update database with new migration
+dotnet ef migrations remove -> remove last migration
