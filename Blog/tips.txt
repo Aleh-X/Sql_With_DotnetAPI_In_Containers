@@ -1,0 +1,1 @@
+﻿git rm -rf --cached . --> to remove noise on mac os
