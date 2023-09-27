@@ -6,3 +6,6 @@ dotnet ef migrations remove --context [context name]
 dotnet ef migrations add [migration name] -> add migration
 dotnet ef database update -> update database with new migration
 dotnet ef migrations remove -> remove last migration
+
+Docker:
+default port to connect from azure data studio: Server=tcp:127.0.0.1,1433;
