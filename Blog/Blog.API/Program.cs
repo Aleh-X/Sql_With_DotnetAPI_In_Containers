@@ -6,7 +6,7 @@ namespace Blog.API;
 
 public class Program
 {
-    public static async Task Main(string[] args)
+    public static Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -46,16 +46,8 @@ public class Program
 
         app.MapControllers();
 
-        //if (app.Environment.IsDevelopment())
-        //{
-        //    using var scope = app.Services.CreateScope();
-
-        //    var context = scope.ServiceProvider.GetRequiredService<BlogContext>();
-
-        //    await new BlogContextSeed().SeedAsync(context);
-        //}
-
         app.Run();
+        return Task.CompletedTask;
     }
 }
 
